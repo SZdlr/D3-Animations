@@ -42,25 +42,28 @@ function pulseReverse(d){
 
 function animateDetails(d){
 	this.parentNode.appendChild(this);
-	d3.select(this)
-		.style("pointer-events", "none")
+	imgLogo.style("pointer-events", "none")
+		.on("mouseover", pulseReverse)
+		.on("mouseout", pulse)
+		.on("click", animateDetailsReverse)
 		.transition()
 			.duration(600)
-			.attr("transform","translate("+window.innerWidth*0.035+","+window.innerWidth*0.050+")scale(0.40)")
+			.attr("transform","translate("+window.innerWidth*0.035+","+window.innerWidth*0.050+")scale(0.35)")
 			.style("opacity",1)
+		.transition().attr("transform","translate("+window.innerWidth*0.035+","+window.innerWidth*0.050+")scale(0.40)")
+		.transition().style("pointer-events", "")
 	;
 	
-	imgBG
-		.style("pointer-events", "none")
-		.transition()
+	imgBG.transition()
 			.duration(600)
-			.attr("transform","translate("+window.innerWidth*0.035+","+window.innerWidth*0.050+")scale(0.40)")
+			.attr("transform","translate("+window.innerWidth*0.035+","+window.innerWidth*0.050+")scale(0.35)")
+		.transition().attr("transform","translate("+window.innerWidth*0.035+","+window.innerWidth*0.050+")scale(0.40)")
 	;
 	
 	svg.append("line")
-		.attr("x1","0%")
+		.attr("x1","25%")
 		.attr("y1","63%")
-		.attr("x2","50%")
+		.attr("x2","25%")
 		.attr("y2","63%")
 		
 		.style("stroke", "#3c4554")
@@ -69,12 +72,14 @@ function animateDetails(d){
 			.delay(800)
 			.duration(600)
 			.style("stroke-opacity",1)
+			.attr("x1","0%")
+			.attr("x2","50%")
 	;
 	svg.append("line")
 		.attr("x1","55%")
-		.attr("y1","0")
+		.attr("y1","50%")
 		.attr("x2","55%")
-		.attr("y2","100%")
+		.attr("y2","50%")
 		
 		.style("stroke", "#3c4554")
 		.style("stroke-opacity",0)
@@ -82,6 +87,8 @@ function animateDetails(d){
 			.delay(1500)
 			.duration(600)
 			.style("stroke-opacity",1)
+			.attr("y1","0")
+			.attr("y2","100%")
 	;
 	
 	svg.selectAll("text")
@@ -152,4 +159,7 @@ function animateDetails(d){
 				.duration(600)
 				.style("fill-opacity",1)
 	;
+}
+
+function animateDetailsReverse(d){
 }
